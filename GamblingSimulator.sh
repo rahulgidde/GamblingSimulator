@@ -2,6 +2,6 @@
 
 #CONSTANT
 STAKE=100
-BEAT=1
+BET=1
 
 
