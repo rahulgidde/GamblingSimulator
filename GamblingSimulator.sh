@@ -5,7 +5,7 @@ STAKE=100
 BET=1
 MAXWIN=$(($STAKE+$STAKE/2))
 MINLOSS=$(($STAKE/2))
-NUMBER_OF_DAYS=20
+NUMBER_OF_DAYS=30
 
 #VARIABLE
 cash=0
@@ -27,11 +27,11 @@ function gambling
 	echo $cash
 }
 
-#CHECK IF WIN OR LOOSE FOR 20 DAYS AND FIND TOTAL AMOUNT
+#CALCULATING STAKE FOR A MONTH
 for (( day=1; day<=$NUMBER_OF_DAYS; day++ ))
 do
 	cashPerDay=$(gambling)
-	cashPerDay=$(( $cashPerDay - $STAKE ))
+	cashPerDay=$(($cashPerDay - $STAKE))
 	dailyCash[Day$day]=$cashPerDay
 	totalCash=$(($totalCash+$cashPerDay))
 	if [ $cashPerDay -gt 0 ]
