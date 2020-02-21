@@ -10,6 +10,9 @@ NUMBER_OF_DAYS=30
 #VARIABLE
 cash=0
 
+#DECLARE DICTIONARY
+declare -A dailyCash
+
 #FUNCTION TO GET DAILY CASH WIN OR LOOSE
 function gambling
 {
@@ -41,5 +44,5 @@ do
 		echo "Day$day  loose:" $cashPerDay"$"
 	fi
 done
-echo "Total cash for 20 days:$totalCash"
+echo "Total cash for 30 days:$totalCash"
 
