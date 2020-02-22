@@ -36,7 +36,7 @@ function sorting()
 {
 	for k in ${!totalCashPerDay[@]}
 	do
-		echo $k '-' ${totalCashPerDay[$k]}
+	echo $k '-' ${totalCashPerDay[$k]}
 	done |  sort -rn -k3
 }
 
