@@ -41,21 +41,34 @@ function sorting()
 }
 
 #CALCULATING STAKE FOR A MONTH
-for (( day=1; day<=$NUMBER_OF_DAYS; day++ ))
-do
-	cashPerDay=$(gambling)
-	cashPerDay=$(($cashPerDay - $STAKE))
-	dailyCash[Day$day]=$cashPerDay
-	totalCash=$(($totalCash+$cashPerDay))
-	if [ $cashPerDay -gt 0 ]
-	then
-		echo "Day$day  win  :" $cashPerDay
-	else
-		echo "Day$day  loose:" $cashPerDay
-	fi
-	totalCashPerDay[Day$day]=$totalCash
-done
-echo "Total cash for 30 days:"$totalCash
-echo "Luckiest "$(sorting | head -1)
-echo "Unluckiest "$(sorting | tail -1)
+function monthlyStake
+{
+	for (( day=1; day<=$NUMBER_OF_DAYS; day++ ))
+	do
+		cashPerDay=$(gambling)
+		cashPerDay=$(($cashPerDay - $STAKE))
+		dailyCash[Day$day]=$cashPerDay
+		totalCash=$(($totalCash+$cashPerDay))
+		if [ $cashPerDay -gt 0 ]
+		then
+			echo "Day$day  win  :" $cashPerDay
+		else
+			echo "Day$day  loose:" $cashPerDay
+		fi
+		totalCashPerDay[Day$day]=$totalCash
+	done
+	echo "Total cash for 30 days:"$totalCash
+	echo "Luckiest "$(sorting | head -1)
+	echo "Unluckiest "$(sorting | tail -1)
 
+#IF GAMBLER WON THEN CONTINUE IN NEXT MONTH
+	if [ $totalCash -gt $STAKE ]
+	then
+		monthlyStake
+	else
+		echo "Loss"
+	fi
+}
+
+#FUNCTION CALL
+monthlyStake
