@@ -12,6 +12,7 @@ cash=0
 
 #DECLARE DICTIONARY
 declare -A dailyCash
+declare -A totalCashPerDay
 
 #FUNCTION TO GET DAILY CASH WIN OR LOOSE
 function gambling
@@ -30,6 +31,15 @@ function gambling
 	echo $cash
 }
 
+#FUNCTION TO GET LUCKIEST DAY AND UNLUCKIEST DAY
+function sorting()
+{
+	for k in ${!totalCashPerDay[@]}
+	do
+		echo $k '-' ${totalCashPerDay[$k]}
+	done |  sort -rn -k3
+}
+
 #CALCULATING STAKE FOR A MONTH
 for (( day=1; day<=$NUMBER_OF_DAYS; day++ ))
 do
@@ -39,10 +49,13 @@ do
 	totalCash=$(($totalCash+$cashPerDay))
 	if [ $cashPerDay -gt 0 ]
 	then
-		echo "Day$day  win  :" $cashPerDay"$"
+		echo "Day$day  win  :" $cashPerDay
 	else
-		echo "Day$day  loose:" $cashPerDay"$"
+		echo "Day$day  loose:" $cashPerDay
 	fi
+	totalCashPerDay[Day$day]=$totalCash
 done
-echo "Total cash for 30 days:$totalCash"
+echo "Total cash for 30 days:"$totalCash
+echo "Luckiest "$(sorting | head -1)
+echo "Unluckiest "$(sorting | tail -1)
 
