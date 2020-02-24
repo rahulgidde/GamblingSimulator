@@ -15,13 +15,13 @@ declare -A dailyCash
 declare -A totalCashPerDay
 
 #FUNCTION TO GET DAILY CASH WIN OR LOOSE
-function gambling
+function gambling()
 {
 	cash=$STAKE
 	while [[ $cash -ne $MAXWIN  && $cash -ne $MINLOSS ]]
 	do
-		randomcheck=$((RANDOM%2))
-		if [ $randomcheck -eq $BET ]
+		checkBet=$((RANDOM%2))
+		if [ $checkBet -eq $BET ]
 		then
 			((cash++))
 		else
@@ -41,7 +41,7 @@ function sorting()
 }
 
 #CALCULATING STAKE FOR A MONTH
-function monthlyStake
+function monthlyStake()
 {
 	for (( day=1; day<=$NUMBER_OF_DAYS; day++ ))
 	do
